@@ -1,39 +1,59 @@
+#pragma once
+
 #include "library/bits/stdc++.h"
 #include "library/mod.hpp"
 
-namespace library::combinatorics {
+namespace library {
 
-using ll = long long;
+enum CombinatoricsFeature : uint32_t { Factorial = 1 << 0, All = Factorial };
 
-template <const ll M>
-std::pair<std::vector<ll>, std::vector<ll>> factorial(int n) {
-  std::vector<ll> f(n), fi(n);
-  f[0] = 1;
-  for (int i : std::ranges::views::iota(1, n)) {
-    f[i] = f[i - 1] * i % M;
+template <const uint32_t M> class Combinatorics {
+public:
+  using Mint = mod::ModularInt<M>;
+  CombinatoricsFeature features;
+  std::vector<Mint> f, fi;
+
+  Combinatorics(int n, CombinatoricsFeature features = All)
+      : features(features) {
+    if (features & Factorial) {
+      f.assign(n, 1);
+      fi.assign(n, 1);
+      for (int i : std::ranges::views::iota(1, n)) {
+        f[i] = f[i - 1] * i;
+      }
+
+      fi[n - 1] = f[n - 1].inv();
+
+      for (int i : std::ranges::views::iota(0, n - 1) | std::views::reverse) {
+        fi[i] = fi[i + 1] * (i + 1);
+      }
+    }
   }
 
-  fi[n - 1] = library::mod::binpow<M>(f[n - 1], M - 2);
-
-  for (int i : std::ranges::views::iota(0, n - 1) | std::views::reverse) {
-    fi[i] = fi[i + 1] * (i + 1) % M;
+  Mint C(int n, int k) const {
+    if (!(features & Factorial)) {
+      throw std::runtime_error(
+          "Factorial feature not enabled for Combinatorics");
+    }
+    if (k < 0 || k > n)
+      return 0;
+    return f[n] * fi[k] * fi[n - k];
   }
 
-  return {f, fi};
+  Mint P(int n, int k) const {
+    if (!(features & Factorial)) {
+      throw std::runtime_error(
+          "Factorial feature not enabled for Combinatorics");
+    }
+    if (k < 0 || k > n)
+      return 0;
+    return f[n] * fi[n - k];
+  }
+};
+
+template <const uint32_t M>
+Combinatorics<M> combinatorics(int n, CombinatoricsFeature features = All) {
+  return Combinatorics<M>(n, features);
 }
 
-template <const ll M>
-ll C(int n, int k, std::vector<ll> &f, std::vector<ll> &fi) {
-  if (k < 0 || k > n)
-    return 0;
-  return (f[n] * fi[k] % M) * fi[n - k] % M;
-}
-
-template <const ll M>
-ll P(int n, int k, std::vector<ll> &f, std::vector<ll> &fi) {
-  if (k < 0 || k > n)
-    return 0;
-  return f[n] * fi[n - k] % M;
-}
-
-} // namespace library::combinatorics
+} // namespace library

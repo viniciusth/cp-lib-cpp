@@ -20,10 +20,13 @@ pch:
 
 all: $(CLI_BIN)
 
+# Optimization Flags
+FAST_FLAGS = -include src/library/bits/stdc++.h -fuse-ld=gold
+
 $(CLI_BIN): $(CLI_SRCS)
 	@mkdir -p bin
 	@echo "Building Komodo CLI..."
-	$(CXX) $(CXXFLAGS) src/cli/main.cpp -I src/cli -I src -o $(CLI_BIN)
+	$(CXX) $(CXXFLAGS) $(FAST_FLAGS) src/cli/main.cpp -I src/cli -I src -o $(CLI_BIN)
 
 run: $(CLI_BIN)
 	@mkdir -p build
@@ -35,6 +38,13 @@ expand: $(CLI_BIN)
 stress: $(CLI_BIN)
 	@mkdir -p build
 	@$(CLI_BIN) stress $(FILE)
+
+test:
+	@mkdir -p bin/tests
+	$(CXX) $(CXXFLAGS) $(FAST_FLAGS) tests/stress_segtree.cpp -I src -o bin/tests/stress_segtree
+	@./bin/tests/stress_segtree
+	$(CXX) $(CXXFLAGS) $(FAST_FLAGS) tests/test_persistent_segtree.cpp -I src -o bin/tests/test_persistent_segtree
+	@./bin/tests/test_persistent_segtree
 
 clean:
 	rm -rf bin build input.txt expected.txt actual.txt src/library/bits/stdc++.h.gch
