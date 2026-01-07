@@ -46,7 +46,7 @@
  *    - Ensure Data Nodes implement necessary operators (`+`, `*`, `=`).
  */
 
-namespace library::segtree::monoids {
+namespace lib::segtree::monoids {
 
 // --- Data Policies ---
 
@@ -301,4 +301,4 @@ struct Lazy {
   static F id() { return ActionConfig::id(); }
 };
 
-} // namespace library::segtree::monoids
+} // namespace lib::segtree::monoids

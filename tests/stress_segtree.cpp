@@ -1,10 +1,5 @@
-#include "library/mod.hpp"
-#include "library/segtree.hpp"
-#include <algorithm>
-#include <cassert>
-#include <iostream>
-#include <random>
-#include <vector>
+#include "library/bits/stdc++.h"
+#include "library/library.hpp"
 
 using namespace library::segtree;
 using namespace library::mod;

@@ -2,7 +2,7 @@
 
 #include "library/bits/stdc++.h"
 
-namespace library::io {
+namespace lib::io {
 
 inline void setup_io() {
 #ifdef FILE_IO

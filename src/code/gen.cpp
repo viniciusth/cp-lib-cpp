@@ -1,6 +1,4 @@
-#include "library/bits/stdc++.h"
-
-using namespace std;
+#include "library/library.hpp"
 
 int main() {
   mt19937 rng(random_device{}());

@@ -1,9 +1,9 @@
 #pragma once
 
 #include "library/bits/stdc++.h"
-#include "library/segtree_configs.hpp"
+#include "library/segment_trees/segtree_configs.hpp"
 
-namespace library::segtree {
+namespace lib::segtree {
 
 /**
  * @brief Persistent Segment Tree.
@@ -180,4 +180,4 @@ private:
   }
 };
 
-} // namespace library::segtree
+} // namespace lib::segtree

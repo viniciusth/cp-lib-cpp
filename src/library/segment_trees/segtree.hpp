@@ -1,9 +1,9 @@
 #pragma once
 
 #include "library/bits/stdc++.h"
-#include "library/segtree_configs.hpp"
+#include "library/segment_trees/segtree_configs.hpp"
 
-namespace library::segtree {
+namespace lib::segtree {
 
 template <class Config> class SegTree {
 public:
@@ -400,4 +400,4 @@ template <typename T>
 using LazyRangeAffineSumTree =
     LazySegTree<monoids::Lazy<monoids::RangeAffine, monoids::RangeSum, T>>;
 
-} // namespace library::segtree
+} // namespace lib::segtree

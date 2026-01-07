@@ -1,14 +1,11 @@
-#include "library/bits/stdc++.h"
-
+#include "library/io.hpp"
 #include "library/library.hpp"
-
-using ll = long long;
 
 void solve() {
   int n, x, y;
-  std::string s;
-  std::cin >> n >> x >> y >> s;
-  auto p = library::io::read_vec<ll>(n);
+  string s;
+  cin >> n >> x >> y >> s;
+  auto p = lib::io::read_vec<i64>(n);
   int total = 0;
   int a_extra = 0;
   int b_extra = 0;
@@ -32,21 +29,21 @@ void solve() {
     y += use;
   }
   if (x < 0 || y < 0) {
-    std::println("NO");
+    println("NO");
   } else if (x > 0 && !(has_a || y >= x)) {
-    std::println("NO");
+    println("NO");
   } else if (y > 0 && !(has_b || x >= y)) {
-    std::println("NO");
+    println("NO");
   } else {
-    std::println("YES");
+    println("YES");
   }
 }
 
 int main() {
-  library::io::setup_io();
+  lib::io::setup_io();
 
   int t = 1;
-  std::cin >> t;
+  cin >> t;
   while (t--) {
     solve();
   }

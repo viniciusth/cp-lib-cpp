@@ -3,7 +3,7 @@
 #include "library/bits/stdc++.h"
 #include "library/mod.hpp"
 
-namespace library {
+namespace lib {
 
 enum CombinatoricsFeature : uint32_t { Factorial = 1 << 0, All = Factorial };
 
@@ -56,4 +56,4 @@ Combinatorics<M> combinatorics(int n, CombinatoricsFeature features = All) {
   return Combinatorics<M>(n, features);
 }
 
-} // namespace library
+} // namespace lib

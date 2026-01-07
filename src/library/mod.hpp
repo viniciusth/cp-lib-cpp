@@ -2,7 +2,7 @@
 
 #include "library/bits/stdc++.h"
 
-namespace library::mod {
+namespace lib::mod {
 
 const uint32_t P1 = 1e9 + 7;
 const uint32_t P2 = 998244353;
@@ -127,4 +127,4 @@ template <const uint32_t M> ModularInt<M> binpow(ModularInt<M> a, long long b) {
   return a.power(b);
 }
 
-} // namespace library::mod
+} // namespace lib::mod

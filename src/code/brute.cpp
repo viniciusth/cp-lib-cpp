@@ -1,16 +1,13 @@
-#include "library/bits/stdc++.h"
-
+#include "library/io.hpp"
 #include "library/library.hpp"
-
-using namespace std;
 
 void solve() {
 
   int n;
   cin >> n;
-  auto a = library::io::read_vec<int>(n);
-  auto b = library::io::read_vec<int>(n);
-  auto c = library::io::read_vec<int>(n);
+  auto a = lib::io::read_vec<int>(n);
+  auto b = lib::io::read_vec<int>(n);
+  auto c = lib::io::read_vec<int>(n);
   long long ans = 0;
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < n; j++) {
@@ -33,7 +30,7 @@ void solve() {
 }
 
 int main() {
-  library::io::setup_io();
+  lib::io::setup_io();
 
   int t = 1;
   std::cin >> t;

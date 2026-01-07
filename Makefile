@@ -11,14 +11,19 @@ FILE ?= a
 
 .PHONY: all run expand stress clean cmake
 
+all: cmake pch $(CLI_BIN)
+
 cmake:
 	cmake -S . -B build
 	ln -sf build/compile_commands.json compile_commands.json
 
-pch:
-	$(CXX) $(CXXFLAGS) -x c++-header src/library/bits/stdc++.h -o src/library/bits/stdc++.h.gch
+PCH_SRC = src/library/bits/stdc++.h
+PCH_GCH = $(PCH_SRC).gch
 
-all: $(CLI_BIN)
+$(PCH_GCH): $(PCH_SRC)
+	$(CXX) $(CXXFLAGS) -x c++-header $(PCH_SRC) -o $(PCH_GCH)
+
+pch: $(PCH_GCH)
 
 # Optimization Flags
 FAST_FLAGS = -include src/library/bits/stdc++.h -fuse-ld=gold
